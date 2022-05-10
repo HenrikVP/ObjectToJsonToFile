@@ -4,21 +4,20 @@ namespace JsonToFile
 {
     internal class FileHandling
     {
-        const string path = @"C:\path.json";
 
         /// <summary>
-        /// Converts a Object to JSON and writes to file
+        /// Converts an Object to JSON and writes to file
         /// </summary>
-        public void ObjectToJsonToFile(Object data)
+        internal void ObjectToJsonToFile(string path, object data)
         {
-            string content = JsonSerializer.Serialize(data);
-            File.WriteAllText(path, content);
+            string json = JsonSerializer.Serialize(data);
+            File.WriteAllText(path, json);
         }
 
         /// <summary>
-        /// Reads file from path and convert JSON to type T Object
+        /// Reads file from path and convert JSON to generic type T object
         /// </summary>
-        internal T? FileToJsonToObject<T>()
+        internal T? FileToJsonToObject<T>(string path)
         {
             string json = File.ReadAllText(path);
             T? obj = JsonSerializer.Deserialize<T>(json);
