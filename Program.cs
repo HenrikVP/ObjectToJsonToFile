@@ -3,7 +3,7 @@
 FileHandling fh = new();
 string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"/file.json";
 
-AddData();
+//AddData();
 RetrieveData();
 
 void AddData()
@@ -19,12 +19,21 @@ void AddData()
 
 void RetrieveData()
 {
-    Data? dataLoad = fh.FileToJsonToObject<Data>(path);
-    if (dataLoad != null && dataLoad.persons != null)
+    if (File.Exists(path))
     {
-        foreach (Person p in dataLoad.persons)
+        Data? dataLoad = fh.FileToJsonToObject<Data>(path);
+        if (dataLoad != null && dataLoad.persons != null)
         {
-            Console.WriteLine($"Name: {p.Name}, Id: {p.Id}, Selected: {p.Selected}");
+            foreach (Person p in dataLoad.persons)
+            {
+                Console.WriteLine($"Name: {p.Name}, Id: {p.Id}, Selected: {p.Selected}");
+            }
         }
+    }
+    else
+    {
+        Data dataSave = new();
+        dataSave.persons = new();
+        fh.ObjectToJsonToFile(path, dataSave);
     }
 }
