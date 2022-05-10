@@ -7,7 +7,7 @@ namespace JsonToFile
         const string path = @"C:\path.json";
 
         /// <summary>
-        /// Converts a Data Object to JSON and writes to file
+        /// Converts a Object to JSON and writes to file
         /// </summary>
         public void ObjectToJsonToFile(Object data)
         {
