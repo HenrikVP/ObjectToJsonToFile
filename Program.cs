@@ -19,9 +19,13 @@ void AddData()
 
 void RetrieveData()
 {
-    Data dataLoad = fh.FileToJsonToObject<Data>();
-    foreach (Person p in dataLoad.persons)
+    Data? dataLoad = fh.FileToJsonToObject<Data>();
+    if (dataLoad != null && dataLoad.persons != null)
     {
-        Console.WriteLine($"Name: {p.Name}, Id: {p.Id}, Selected: {p.Selected}");
+        foreach (Person p in dataLoad.persons)
+        {
+            Console.WriteLine($"Name: {p.Name}, Id: {p.Id}, Selected: {p.Selected}");
+        }
     }
+
 }
